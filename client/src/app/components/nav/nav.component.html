@@ -1,0 +1,48 @@
+<nav>
+  <div class="logo">
+    <a routerLink="/"
+      ><img class="logo-img" src="../../../assets/logo.png" alt="Logo"
+    /></a>
+  </div>
+  <ul>
+    <li>
+      <a [routerLink]="['setups']" routerLinkActive="router-link-active"
+        >Setups</a
+      >
+    </li>
+    <li *ngIf="authenticated">
+      <a [routerLink]="['lists']" routerLinkActive="router-link-active"
+        >Lists</a
+      >
+    </li>
+    <li *ngIf="authenticated">
+      <a [routerLink]="['messages']" routerLinkActive="router-link-active"
+        >Messages</a
+      >
+    </li>
+  </ul>
+  <ul *ngIf="authenticated">
+    <li>
+      <a (click)="logout()" class="logout">Logout</a>
+    </li>
+  </ul>
+  <form [formGroup]="loginForm" class="login-form" *ngIf="!authenticated">
+    <input
+      type="text"
+      name="username"
+      aria-label="Username"
+      placeholder="Username"
+      formControlName="username"
+    />
+    <input
+      type="password"
+      name="password"
+      aria-label="Password"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <button type="submit" (click)="login()" [disabled]="!loginForm.valid">
+      Login
+    </button>
+  </form>
+</nav>
