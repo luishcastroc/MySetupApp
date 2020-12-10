@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
-import { Observable, of, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Login, Logout } from 'src/app/_state/app.actions';
 import { ApplicationState } from 'src/app/_state/app.state';
 
@@ -11,42 +11,35 @@ import { ApplicationState } from 'src/app/_state/app.state';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit, OnDestroy {
+export class NavComponent implements OnInit {
   @Select(ApplicationState.isAuthenticated)
   isAuthenticated$!: Observable<boolean>;
-  authenticated = false;
+  isCollapsed = true;
 
   loginForm = this.fb.group({
     username: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
   });
-  private unsubscribeAll!: Subject<any>;
 
-  constructor(private fb: FormBuilder, private store: Store) {
-    this.unsubscribeAll = new Subject();
-  }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
-    this.isAuthenticated$
-      .pipe(takeUntil(this.unsubscribeAll))
-      .subscribe((auth) => {
-        this.authenticated = auth;
-        if (this.authenticated) {
-          this.loginForm.reset();
-        }
-      });
-  }
+  ngOnInit(): void {}
 
   login(): void {
     this.store.dispatch(new Login(this.loginForm.value));
+    this.loginForm.reset();
   }
 
   logout(): void {
     this.store.dispatch(new Logout());
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribeAll.next();
-    this.unsubscribeAll.complete();
+  clickButton(e: MouseEvent) {
+    const target = e.target as HTMLTextAreaElement;
+    this.router.navigate([`${target.id}`]);
   }
 }

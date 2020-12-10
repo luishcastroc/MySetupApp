@@ -1,48 +1,84 @@
-<nav>
-  <div class="logo">
-    <a routerLink="/"
-      ><img class="logo-img" src="../../../assets/logo.png" alt="Logo"
-    /></a>
-  </div>
-  <ul>
-    <li>
-      <a [routerLink]="['setups']" routerLinkActive="router-link-active"
-        >Setups</a
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a routerLink="/" class="navbar-brand"
+    ><img class="logo-img" src="../../../assets/logo.png" alt="Logo"
+  /></a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="isCollapsed = !isCollapsed"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <ng-container *ngIf="{ value: isAuthenticated$ | async } as authenticated">
+    <div
+      class="collapse navbar-collapse"
+      [collapse]="isCollapsed"
+      [isAnimated]="true"
+    >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a [routerLink]="['setups']" routerLinkActive="router-link-active"
+            >Setups</a
+          >
+        </li>
+        <li *ngIf="authenticated.value" class="nav-item">
+          <a [routerLink]="['lists']" routerLinkActive="router-link-active"
+            >Lists</a
+          >
+        </li>
+        <li *ngIf="authenticated.value" class="nav-item">
+          <a [routerLink]="['messages']" routerLinkActive="router-link-active"
+            >Messages</a
+          >
+        </li>
+      </ul>
+      <button
+        *ngIf="!authenticated.value"
+        type="button"
+        class="btn btn-info"
+        id="login"
+        (click)="clickButton($event)"
       >
-    </li>
-    <li *ngIf="authenticated">
-      <a [routerLink]="['lists']" routerLinkActive="router-link-active"
-        >Lists</a
+        Sign In
+      </button>
+      <button
+        *ngIf="!authenticated.value"
+        type="button"
+        class="btn btn-secondary"
+        id="register"
+        (click)="clickButton($event)"
       >
-    </li>
-    <li *ngIf="authenticated">
-      <a [routerLink]="['messages']" routerLinkActive="router-link-active"
-        >Messages</a
-      >
-    </li>
-  </ul>
-  <ul *ngIf="authenticated">
-    <li>
-      <a (click)="logout()" class="logout">Logout</a>
-    </li>
-  </ul>
-  <form [formGroup]="loginForm" class="login-form" *ngIf="!authenticated">
-    <input
-      type="text"
-      name="username"
-      aria-label="Username"
-      placeholder="Username"
-      formControlName="username"
-    />
-    <input
-      type="password"
-      name="password"
-      aria-label="Password"
-      placeholder="Password"
-      formControlName="password"
-    />
-    <button type="submit" (click)="login()" [disabled]="!loginForm.valid">
-      Login
-    </button>
-  </form>
+        Sign Up
+      </button>
+      <div *ngIf="authenticated.value" class="btn-group" dropdown>
+        <button
+          id="button-menu-dividers"
+          dropdownToggle
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          aria-controls="dropdown-menu-dividers"
+        >
+          Welcome User <span class="caret"></span>
+        </button>
+        <ul
+          id="dropdown-menu-dividers"
+          *dropdownMenu
+          class="dropdown-menu"
+          role="menu"
+          aria-labelledby="button-menu-dividers"
+        >
+          <li role="menuitem">
+            <a class="dropdown-item">Edit Profile</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a (click)="logout()" class="dropdown-item">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
 </nav>

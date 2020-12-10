@@ -26,5 +26,11 @@ app-root {
 
 main {
   padding: 20px;
+  padding-top: 6rem;
   flex: 1;
+  display: flex;
+
+  & > *:not(router-outlet) {
+    flex: 1;
+  }
 }

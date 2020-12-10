@@ -1,0 +1,46 @@
+.container {
+  height: 100%;
+  align-content: center;
+}
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 55%;
+  background-color: #343a40;
+}
+
+.card-header h3 {
+  color: white;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: grey;
+  color: black;
+  border: 0;
+}
+
+input:focus {
+  outline: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+}
+
+.links {
+  color: white;
+
+  a {
+    margin-left: 4px;
+  }
+}
+
+.btn-set {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+fa-icon {
+  width: 100%;
+}

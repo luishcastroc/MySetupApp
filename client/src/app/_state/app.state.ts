@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Navigate } from '@ngxs/router-plugin';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -33,7 +34,7 @@ export class ApplicationState {
 
   @Action(Login)
   login(
-    { patchState }: StateContext<IAppState>,
+    { patchState, dispatch }: StateContext<IAppState>,
     { payload }: Login
   ): Observable<IUserLogin> {
     return this.accountService.login(payload).pipe(
@@ -44,17 +45,19 @@ export class ApplicationState {
             token,
           },
         });
+        dispatch(new Navigate(['main']));
       })
     );
   }
 
   @Action(Logout)
-  logout({ setState }: StateContext<IAppState>): void {
+  logout({ setState, dispatch }: StateContext<IAppState>): void {
     setState({
       user: {
         username: null,
         token: null,
       },
     });
+    dispatch(new Navigate(['login']));
   }
 }

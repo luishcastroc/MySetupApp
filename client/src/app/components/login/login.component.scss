@@ -1,0 +1,51 @@
+.container {
+  height: 100%;
+  align-content: center;
+}
+
+.card {
+  height: 370px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: #343a40;
+}
+
+.card-header h3 {
+  color: white;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: grey;
+  color: black;
+  border: 0;
+}
+
+input:focus {
+  outline: 0 0 0 0;
+  box-shadow: 0 0 0 0;
+}
+
+.remember {
+  color: white;
+
+  input {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+  }
+}
+
+.links {
+  color: white;
+
+  a {
+    margin-left: 4px;
+  }
+}
+
+fa-icon {
+  width: 100%;
+}
