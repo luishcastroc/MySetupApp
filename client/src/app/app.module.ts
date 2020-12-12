@@ -22,6 +22,7 @@ import { MessagesModule } from './components/messages/messages.module';
 import { NavComponent } from './components/nav/nav.component';
 import { RegisterModule } from './components/register/register.module';
 import { SetupsModule } from './components/setups/setups.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent],
@@ -47,6 +48,7 @@ import { SetupsModule } from './components/setups/setups.module';
     }),
     FontAwesomeModule,
     NgxsRouterPluginModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

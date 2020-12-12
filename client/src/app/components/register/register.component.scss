@@ -4,7 +4,7 @@
 }
 
 .card {
-  height: 370px;
+  height: 450px;
   margin-top: auto;
   margin-bottom: auto;
   width: 55%;
@@ -13,6 +13,12 @@
 
 .card-header h3 {
   color: white;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .input-group-prepend span {

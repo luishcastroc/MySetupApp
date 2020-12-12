@@ -5,7 +5,7 @@
         <h3>Sign Up</h3>
       </div>
       <div class="card-body">
-        <form [formGroup]="registerForm">
+        <form [formGroup]="registerForm" autocomplete="off">
           <div class="input-group form-group">
             <div class="input-group-prepend">
               <span class="input-group-text"
@@ -17,7 +17,17 @@
               class="form-control"
               placeholder="username"
               formControlName="username"
+              [ngClass]="{
+                'is-valid': username?.valid && username?.touched,
+                'is-invalid': !username?.valid && username?.touched
+              }"
             />
+            <div
+              *ngIf="!username?.valid && username?.touched"
+              class="invalid-feedback"
+            >
+              Email is invalid please verify.
+            </div>
           </div>
           <div class="input-group form-group">
             <div class="input-group-prepend">
@@ -30,7 +40,14 @@
               class="form-control"
               placeholder="name"
               formControlName="name"
+              [ngClass]="{
+                'is-valid': name?.valid && name?.touched,
+                'is-invalid': !name?.valid && name?.touched
+              }"
             />
+            <div *ngIf="!name?.valid && name?.touched" class="invalid-feedback">
+              Name can't be empty.
+            </div>
           </div>
           <div class="input-group form-group">
             <div class="input-group-prepend">
@@ -43,7 +60,25 @@
               class="form-control"
               placeholder="password"
               formControlName="password"
+              [ngClass]="{
+                'is-valid': password?.valid && password?.touched,
+                'is-invalid': !password?.valid && password?.touched
+              }"
             />
+            <ng-container *ngIf="!password?.valid && password?.touched">
+              <div *ngIf="password?.errors?.required" class="invalid-feedback">
+                Password can't be empty.
+              </div>
+              <div
+                *ngIf="
+                  password?.errors?.minlength.actualLength <
+                  password?.errors?.minlength.requiredLength
+                "
+                class="invalid-feedback"
+              >
+                Password needs to have at least 8 characters.
+              </div>
+            </ng-container>
           </div>
           <div class="form-group btn-set">
             <button
