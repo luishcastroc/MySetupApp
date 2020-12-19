@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+  get userFromLocalStorage(): boolean {
+    return !!localStorage.getItem('username');
+  }
+
   constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {}

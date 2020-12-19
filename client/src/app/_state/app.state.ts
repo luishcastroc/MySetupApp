@@ -33,6 +33,11 @@ export class ApplicationState {
     return !!state.user.token;
   }
 
+  @Selector()
+  static user(state: IAppState): IUserLogin {
+    return state.user;
+  }
+
   @Action(Login)
   login(
     { patchState, dispatch }: StateContext<IAppState>,

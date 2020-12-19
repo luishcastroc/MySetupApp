@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -10,6 +10,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ToastrModule } from 'ngx-toastr';
 
 import { environment } from '../environments/environment';
 import { ApplicationState } from './_state/app.state';
@@ -22,7 +23,7 @@ import { MessagesModule } from './components/messages/messages.module';
 import { NavComponent } from './components/nav/nav.component';
 import { RegisterModule } from './components/register/register.module';
 import { SetupsModule } from './components/setups/setups.module';
-import { ToastrModule } from 'ngx-toastr';
+import { ErrorInterceptor } from './error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent],
@@ -48,9 +49,14 @@ import { ToastrModule } from 'ngx-toastr';
     }),
     FontAwesomeModule,
     NgxsRouterPluginModule.forRoot(),
-    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
+    ToastrModule.forRoot({
+      timeOut: 3500,
+      positionClass: 'toast-bottom-right',
+    }),
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

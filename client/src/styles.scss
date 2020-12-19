@@ -16,6 +16,7 @@ html {
   background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
   flex: 1;
   min-height: 100%;
+  color: white;
 }
 
 app-root {
@@ -29,8 +30,16 @@ main {
   padding-top: 6rem;
   flex: 1;
   display: flex;
+  background-image: url("./assets/background.svg");
+  background-size: cover;
 
   & > *:not(router-outlet) {
     flex: 1;
   }
+}
+
+/* TOASTR BUGFIX */
+#toast-container > div {
+  opacity: 1 !important;
+  display: block !important;
 }

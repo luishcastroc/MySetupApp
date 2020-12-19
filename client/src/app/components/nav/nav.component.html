@@ -61,7 +61,7 @@
           class="btn btn-primary dropdown-toggle"
           aria-controls="dropdown-menu-dividers"
         >
-          Welcome User <span class="caret"></span>
+          {{ (user$ | async)?.name | titlecase }} <span class="caret"></span>
         </button>
         <ul
           id="dropdown-menu-dividers"

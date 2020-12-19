@@ -7,10 +7,30 @@ import { AuthGuard } from './_guards/auth.guard';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'main',
-    loadChildren: () =>
-      import('./components/main/main.module').then((mod) => mod.MainModule),
+    path: '',
+    runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'main',
+        loadChildren: () =>
+          import('./components/main/main.module').then((mod) => mod.MainModule),
+      },
+      {
+        path: 'lists',
+        loadChildren: () =>
+          import('./components/lists/lists.module').then(
+            (mod) => mod.ListsModule
+          ),
+      },
+      {
+        path: 'messages',
+        loadChildren: () =>
+          import('./components/messages/messages.module').then(
+            (mod) => mod.MessagesModule
+          ),
+      },
+    ],
   },
   {
     path: 'login',
@@ -31,20 +51,7 @@ const routes: Routes = [
         (mod) => mod.SetupsModule
       ),
   },
-  {
-    path: 'lists',
-    loadChildren: () =>
-      import('./components/lists/lists.module').then((mod) => mod.ListsModule),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'messages',
-    loadChildren: () =>
-      import('./components/messages/messages.module').then(
-        (mod) => mod.MessagesModule
-      ),
-    canActivate: [AuthGuard],
-  },
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -4,7 +4,6 @@
 }
 
 .card {
-  height: 450px;
   margin-top: auto;
   margin-bottom: auto;
   width: 55%;
@@ -44,7 +43,10 @@ input:focus {
 .btn-set {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+
+  :nth-child(1) {
+    margin-right: 10px;
+  }
 }
 
 fa-icon {
