@@ -3,14 +3,16 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201218220911_UpdateUserAndRelations")]
+    partial class UpdateUserAndRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,9 +115,6 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AppUserId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
@@ -125,19 +124,12 @@ namespace API.Data.Migrations
                     b.Property<string>("PublicId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("SetupId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("PartId");
-
-                    b.HasIndex("SetupId");
 
                     b.ToTable("Photo");
                 });
@@ -184,17 +176,9 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
-                    b.HasOne("API.Entities.AppUser", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("API.Entities.Part", null)
                         .WithMany("Photos")
                         .HasForeignKey("PartId");
-
-                    b.HasOne("API.Entities.Setup", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("SetupId");
                 });
 
             modelBuilder.Entity("API.Entities.Setup", b =>
@@ -206,8 +190,6 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.AppUser", b =>
                 {
-                    b.Navigation("Photos");
-
                     b.Navigation("Setups");
                 });
 
@@ -219,8 +201,6 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Setup", b =>
                 {
                     b.Navigation("Parts");
-
-                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }
