@@ -16,7 +16,6 @@ export class SetupsComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    console.log('calling setups');
     this.store.dispatch(new GetSetups());
   }
 }

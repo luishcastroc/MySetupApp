@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <ng-container *ngFor="let setup of setups$ | async">
-      <div class="col-3">{{ setup.title }}</div>
+      <div class="col-3">
+        <app-setup [setup]="setup"></app-setup>
+      </div>
     </ng-container>
   </div>
 </div>
