@@ -3,11 +3,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { IMemberDto } from '../_models/member.model';
+import { ISetupDto } from '../_models/setup.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MemberService {
+export class SetupService {
   baseUrl: string = environment.baseUrl;
   token = JSON.parse(localStorage.getItem('application.user')!).token;
   httpOptions = {
@@ -17,16 +18,9 @@ export class MemberService {
   };
   constructor(private http: HttpClient) {}
 
-  getMembers() {
-    return this.http.get<IMemberDto[]>(
-      `${this.baseUrl}/users`,
-      this.httpOptions
-    );
-  }
-
-  getMember(username: string) {
-    return this.http.get<IMemberDto>(
-      `${this.baseUrl}/users/${username}`,
+  getSetups() {
+    return this.http.get<ISetupDto[]>(
+      `${this.baseUrl}/users/setups`,
       this.httpOptions
     );
   }

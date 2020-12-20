@@ -1,4 +1,4 @@
-import { ISetup } from './setup.model';
+import { ISetupDto } from './setup.model';
 
 export interface IMemberDto {
   id: number;
@@ -13,5 +13,5 @@ export interface IMemberDto {
   aboutMe: string;
   city: string;
   country: string;
-  setups: ISetup[];
+  setups: ISetupDto[];
 }

@@ -23,3 +23,7 @@ export class GetMember {
   static readonly type = '[User] Register';
   constructor(public payload: string) {}
 }
+
+export class GetSetups {
+  static readonly type = '[Setup] GetSetups';
+}

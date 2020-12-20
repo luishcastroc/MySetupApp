@@ -11,5 +11,7 @@ namespace API.Entities
     public Boolean IsMain { get; set; }
     public ICollection<Photo> Photos { get; set; }
     public ICollection<Part> Parts { get; set; }
+    public AppUser User { get; set; }
+    public int UserId { get; set; }
   }
 }

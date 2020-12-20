@@ -1,11 +1,11 @@
-import { IPhoto } from './photo.model';
+import { IPhotoDto } from './photo.model';
 
-export interface IPart {
+export interface IPartDto {
   id: number;
   name: string;
   description: string;
   buyUrl: string;
   category: string;
   photoUrl: string;
-  photos: IPhoto[];
+  photos: IPhotoDto[];
 }

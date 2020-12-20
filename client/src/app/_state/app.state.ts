@@ -6,9 +6,11 @@ import { tap } from 'rxjs/operators';
 
 import { IUserLogin } from '../_models';
 import { IMemberDto } from '../_models/member.model';
+import { ISetupDto } from '../_models/setup.model';
 import { AccountService } from '../_services/account.service';
 import { MemberService } from '../_services/member.service';
-import { GetMembers, Login, Logout, Register } from './app.actions';
+import { SetupService } from '../_services/setup.service';
+import { GetMembers, GetSetups, Login, Logout, Register } from './app.actions';
 import { IAppState } from './app.model';
 
 @State<IAppState>({
@@ -20,13 +22,15 @@ import { IAppState } from './app.model';
       token: null,
     },
     members: [],
+    setups: [],
   },
 })
 @Injectable()
 export class ApplicationState {
   constructor(
     private accountService: AccountService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private setupService: SetupService
   ) {}
 
   @Selector()
@@ -47,6 +51,11 @@ export class ApplicationState {
   @Selector()
   static members(state: IAppState): IMemberDto[] {
     return state.members;
+  }
+
+  @Selector()
+  static setups(state: IAppState): ISetupDto[] {
+    return state.setups;
   }
 
   @Action(Login)
@@ -98,6 +107,17 @@ export class ApplicationState {
     );
   }
 
+  @Action(GetSetups)
+  getSetups({ patchState }: StateContext<IAppState>) {
+    return this.setupService.getSetups().pipe(
+      tap((setups: ISetupDto[]) => {
+        patchState({
+          setups,
+        });
+      })
+    );
+  }
+
   @Action(Logout)
   logout({ setState, dispatch }: StateContext<IAppState>): void {
     setState({
@@ -107,6 +127,7 @@ export class ApplicationState {
         token: null,
       },
       members: [],
+      setups: [],
     });
     dispatch(new Navigate(['login']));
   }

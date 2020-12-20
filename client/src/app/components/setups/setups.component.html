@@ -1,3 +1,7 @@
-<div *ngFor="let member of members$ | async">
-  {{ member | json }}
+<div class="container">
+  <div class="row">
+    <ng-container *ngFor="let setup of setups$ | async">
+      <div class="col-3">{{ setup.title }}</div>
+    </ng-container>
+  </div>
 </div>

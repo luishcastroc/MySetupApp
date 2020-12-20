@@ -35,6 +35,13 @@ namespace API.Data
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<SetupDto>> GetSetupsAsync()
+    {
+      return await _context.Setup
+            .ProjectTo<SetupDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+    }
+
     public async Task<AppUser> GetUserByIdAsync(int id)
     {
       return await _context.Users.FindAsync(id);

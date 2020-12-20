@@ -1,4 +1,4 @@
-export interface IPhoto {
+export interface IPhotoDto {
   id: number;
   isMain: boolean;
   url: string;

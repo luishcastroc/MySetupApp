@@ -1,12 +1,12 @@
-import { IPart } from './part.model';
-import { IPhoto } from './photo.model';
+import { IPartDto } from './part.model';
+import { IPhotoDto } from './photo.model';
 
-export interface ISetup {
+export interface ISetupDto {
   id: number;
   title: string;
   description: string;
   isMain: boolean;
   photoUrl: string;
-  photos: IPhoto[];
-  parts: IPart[];
+  photos: IPhotoDto[];
+  parts: IPartDto[];
 }

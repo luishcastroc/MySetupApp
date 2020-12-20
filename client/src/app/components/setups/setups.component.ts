@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { IMemberDto } from 'src/app/_models/member.model';
-import { GetMembers } from 'src/app/_state/app.actions';
+import { ISetupDto } from 'src/app/_models/setup.model';
+import { GetSetups } from 'src/app/_state/app.actions';
 import { ApplicationState } from 'src/app/_state/app.state';
 
 @Component({
@@ -11,12 +11,12 @@ import { ApplicationState } from 'src/app/_state/app.state';
   styleUrls: ['./setups.component.scss'],
 })
 export class SetupsComponent implements OnInit {
-  @Select(ApplicationState.members)
-  members$!: Observable<IMemberDto[]>;
+  @Select(ApplicationState.setups)
+  setups$!: Observable<ISetupDto[]>;
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    console.log('calling members');
-    this.store.dispatch(new GetMembers());
+    console.log('calling setups');
+    this.store.dispatch(new GetSetups());
   }
 }

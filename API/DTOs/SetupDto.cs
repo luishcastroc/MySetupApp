@@ -12,5 +12,6 @@ namespace API.DTOs
     public string PhotoUrl { get; set; }
     public ICollection<PhotoDto> Photos { get; set; }
     public ICollection<PartDto> Parts { get; set; }
+    public string UserName { get; set; }
   }
 }
