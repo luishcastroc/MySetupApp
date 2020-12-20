@@ -14,3 +14,12 @@ export class Register {
   static readonly type = '[User] Register';
   constructor(public payload: IUserRegisterDto) {}
 }
+
+export class GetMembers {
+  static readonly type = '[Member] GetMembers';
+}
+
+export class GetMember {
+  static readonly type = '[User] Register';
+  constructor(public payload: string) {}
+}

@@ -9,6 +9,8 @@ namespace API.DTOs
     public string Title { get; set; }
     public string Description { get; set; }
     public Boolean IsMain { get; set; }
+    public string PhotoUrl { get; set; }
+    public ICollection<PhotoDto> Photos { get; set; }
     public ICollection<PartDto> Parts { get; set; }
   }
 }

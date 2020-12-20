@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { IUserLogin } from '../_models';
+import { IMemberDto } from '../_models/member.model';
 import { AccountService } from '../_services/account.service';
-import { Login, Logout, Register } from './app.actions';
+import { MemberService } from '../_services/member.service';
+import { GetMembers, Login, Logout, Register } from './app.actions';
 import { IAppState } from './app.model';
 
 @State<IAppState>({
@@ -17,11 +19,15 @@ import { IAppState } from './app.model';
       name: null,
       token: null,
     },
+    members: [],
   },
 })
 @Injectable()
 export class ApplicationState {
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private memberService: MemberService
+  ) {}
 
   @Selector()
   static token(state: IAppState): string | null {
@@ -36,6 +42,11 @@ export class ApplicationState {
   @Selector()
   static user(state: IAppState): IUserLogin {
     return state.user;
+  }
+
+  @Selector()
+  static members(state: IAppState): IMemberDto[] {
+    return state.members;
   }
 
   @Action(Login)
@@ -76,6 +87,17 @@ export class ApplicationState {
     );
   }
 
+  @Action(GetMembers)
+  getMembers({ patchState }: StateContext<IAppState>) {
+    return this.memberService.getMembers().pipe(
+      tap((members: IMemberDto[]) => {
+        patchState({
+          members,
+        });
+      })
+    );
+  }
+
   @Action(Logout)
   logout({ setState, dispatch }: StateContext<IAppState>): void {
     setState({
@@ -84,6 +106,7 @@ export class ApplicationState {
         name: null,
         token: null,
       },
+      members: [],
     });
     dispatch(new Navigate(['login']));
   }

@@ -12,11 +12,11 @@ export class AccountService {
   baseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
-  login(login: ILogin): Observable<IUserLogin> {
+  login(login: ILogin) {
     return this.http.post<IUserLogin>(`${this.baseUrl}/account/login`, login);
   }
 
-  register(user: IUserRegisterDto): Observable<IUserLogin> {
+  register(user: IUserRegisterDto) {
     return this.http.post<IUserLogin>(`${this.baseUrl}/account/register`, user);
   }
 }

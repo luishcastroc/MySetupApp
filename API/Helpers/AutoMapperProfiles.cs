@@ -1,5 +1,7 @@
+using System.Linq;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
 using AutoMapper;
 
 namespace API.Helpers
@@ -8,9 +10,19 @@ namespace API.Helpers
   {
     public AutoMapperProfiles()
     {
-        CreateMap<AppUser, MemberDto>();
-        CreateMap<Setup, SetupDto>();
-        CreateMap<Part, PartDto>();
+        CreateMap<AppUser, MemberDto>()
+          .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
+            src.Photos.FirstOrDefault(p => p.IsMain).Url))
+          .ForMember(dest => dest.Age, opt => opt.MapFrom(src =>
+            src.DateOfBirth.CalculateAge()));
+        CreateMap<Setup, SetupDto>()
+          .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
+            src.Photos.FirstOrDefault(p => p.IsMain).Url));
+        CreateMap<Part, PartDto>()
+        .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
+            src.Photos.FirstOrDefault(p => p.IsMain).Url))
+        .ForMember(dest => dest.Category, opt => opt.MapFrom(src =>
+            src.Category.Name));
         CreateMap<Photo, PhotoDto>();
     }
   }
