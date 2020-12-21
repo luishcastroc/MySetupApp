@@ -9,7 +9,9 @@ import { IMemberDto } from '../_models/member.model';
 })
 export class MemberService {
   baseUrl: string = environment.baseUrl;
-  token = JSON.parse(localStorage.getItem('application.user')!).token;
+  token = JSON.parse(localStorage.getItem('application.user')!)
+    ? JSON.parse(localStorage.getItem('application.user')!).token
+    : null;
   httpOptions = {
     headers: new HttpHeaders({
       Authorization: `Bearer ${this.token}`,

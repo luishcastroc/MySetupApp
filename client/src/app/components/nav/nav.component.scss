@@ -37,6 +37,9 @@ nav {
 
 #login {
   margin-right: 1rem;
+  @media (max-width: 766px) {
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 960px) {
