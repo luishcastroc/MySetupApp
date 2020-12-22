@@ -12,7 +12,5 @@ export class SetupComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log('setup: ', this.setup);
-  }
+  ngOnInit(): void {}
 }
