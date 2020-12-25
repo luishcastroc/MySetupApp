@@ -1,3 +1,17 @@
+.card {
+  @media (max-width: 750px) {
+    max-width: 80vw;
+  }
+}
+
+.card:hover {
+  .action-buttons {
+    transition: all 600ms ease-in-out;
+    opacity: 1;
+    bottom: 30%;
+  }
+}
+
 .card-header {
   text-overflow: ellipsis;
   overflow: hidden;
@@ -13,4 +27,22 @@
 
 .card-body {
   height: 135px;
+}
+
+.setup-img {
+  flex-basis: 20rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  position: absolute;
+  bottom: 20%;
+  width: 100%;
+  opacity: 0;
 }

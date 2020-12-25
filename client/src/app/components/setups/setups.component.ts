@@ -13,6 +13,7 @@ import { ApplicationState } from 'src/app/_state/app.state';
 export class SetupsComponent implements OnInit {
   @Select(ApplicationState.setups)
   setups$!: Observable<ISetupDto[]>;
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {
