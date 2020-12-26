@@ -11,7 +11,11 @@
   />
   <ul class="action-buttons">
     <li class="mr-3">
-      <button type="button" class="btn btn-dark">
+      <button
+        type="button"
+        class="btn btn-dark"
+        (click)="goToProfile(setup.userName)"
+      >
         <fa-icon [icon]="faUser"></fa-icon>
       </button>
     </li>

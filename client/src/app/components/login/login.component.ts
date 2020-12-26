@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { Login } from 'src/app/_state/app.actions';
+
 import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Login } from '@state/app.actions';
 
 @Component({
   selector: 'app-login',

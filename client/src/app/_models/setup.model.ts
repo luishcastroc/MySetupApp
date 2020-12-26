@@ -9,4 +9,5 @@ export interface ISetupDto {
   photoUrl: string;
   photos: IPhotoDto[];
   parts: IPartDto[];
+  userName: string;
 }

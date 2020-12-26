@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISetupDto } from 'src/app/_models/setup.model';
+import { Router } from '@angular/router';
+import slugify from 'slugify';
+
 import {
   faThumbsUp,
   faUser,
   faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
+import { ISetupDto } from '@models/setup.model';
 
 @Component({
   selector: 'app-setup',
@@ -19,7 +22,12 @@ export class SetupComponent implements OnInit {
   faUser = faUser;
   faEnvelope = faEnvelope;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  goToProfile(username: string): void {
+    console.log(slugify(username, { lower: true }));
+    this.router.navigate([`user/${slugify(username, { lower: true })}`]);
+  }
 }

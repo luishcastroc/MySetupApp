@@ -14,20 +14,27 @@ const routes: Routes = [
       {
         path: 'main',
         loadChildren: () =>
-          import('./components/main/main.module').then((mod) => mod.MainModule),
+          import('@components/main/main.module').then((mod) => mod.MainModule),
       },
       {
         path: 'lists',
         loadChildren: () =>
-          import('./components/lists/lists.module').then(
+          import('@components/lists/lists.module').then(
             (mod) => mod.ListsModule
           ),
       },
       {
         path: 'messages',
         loadChildren: () =>
-          import('./components/messages/messages.module').then(
+          import('@components/messages/messages.module').then(
             (mod) => mod.MessagesModule
+          ),
+      },
+      {
+        path: 'user/:username',
+        loadChildren: () =>
+          import('@components/user-detail/user-detail.module').then(
+            (mod) => mod.UserDetailModule
           ),
       },
     ],
@@ -35,19 +42,19 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./components/login/login.module').then((mod) => mod.LoginModule),
+      import('@components/login/login.module').then((mod) => mod.LoginModule),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./components/register/register.module').then(
+      import('@components/register/register.module').then(
         (mod) => mod.RegisterModule
       ),
   },
   {
     path: 'setups',
     loadChildren: () =>
-      import('./components/setups/setups.module').then(
+      import('@components/setups/setups.module').then(
         (mod) => mod.SetupsModule
       ),
   },

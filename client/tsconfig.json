@@ -1,4 +1,3 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -16,7 +15,14 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": ["ES2019", "es2018", "dom"]
+    "lib": ["ES2019", "es2018", "dom"],
+    "paths": {
+      "@components/*": ["src/app/components/*"],
+      "@state/*": ["src/app/_state/*"],
+      "@services/*": ["src/app/_services/*"],
+      "@pipes/*": ["src/app/_pipes/*"],
+      "@models/*": ["src/app/_models/*"]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

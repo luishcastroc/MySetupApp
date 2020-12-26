@@ -3,10 +3,10 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faKey, faUser, faUserTag } from '@fortawesome/free-solid-svg-icons';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { Register } from '@state/app.actions';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Register } from 'src/app/_state/app.actions';
 
 @Component({
   selector: 'app-register',

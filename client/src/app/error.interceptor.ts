@@ -26,8 +26,8 @@ export class ErrorInterceptor implements HttpInterceptor {
               if (error.error.errors) {
                 const errors = error.error.errors;
                 const modalStateErrors: string[] = [];
-                errors.forEach((error: string) => {
-                  modalStateErrors.push(error);
+                errors.forEach((err: string) => {
+                  modalStateErrors.push(err);
                 });
                 throw modalStateErrors;
               } else {

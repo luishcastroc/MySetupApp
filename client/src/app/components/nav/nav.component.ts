@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IUserLogin } from '@models/user-login.model';
+
 import { Select, Store } from '@ngxs/store';
+import { Login, Logout } from '@state/app.actions';
+import { ApplicationState } from '@state/app.state';
 import { Observable } from 'rxjs';
-import { IUserLogin } from 'src/app/_models';
-import { Login, Logout } from 'src/app/_state/app.actions';
-import { ApplicationState } from 'src/app/_state/app.state';
 
 @Component({
   selector: 'app-nav',
@@ -43,7 +44,7 @@ export class NavComponent implements OnInit {
     this.store.dispatch(new Logout());
   }
 
-  clickButton(e: MouseEvent) {
+  clickButton(e: MouseEvent): void {
     const target = e.target as HTMLTextAreaElement;
     this.router.navigate([`${target.id}`]);
   }
