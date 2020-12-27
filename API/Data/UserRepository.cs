@@ -50,41 +50,6 @@ namespace API.Data
             .ToListAsync();
     }
 
-    public async Task<AppUser> GetUserByIdAsync(int id)
-    {
-      return await _context.Users.FindAsync(id);
-    }
-
-    public async Task<AppUser> GetUserByUsernameAsync(string username)
-    {
-      return await _context.Users
-            .Include(p => p.Photos)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Parts)
-            .ThenInclude(p => p.Photos)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Parts)
-            .ThenInclude(c => c.Category)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Photos)
-            .SingleOrDefaultAsync(user => user.UserName == username);
-    }
-
-    public async Task<IEnumerable<AppUser>> GetUsersAsync()
-    {
-      return await _context.Users
-            .Include(p => p.Photos)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Parts)
-            .ThenInclude(p => p.Photos)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Parts)
-            .ThenInclude(c => c.Category)
-            .Include(s => s.Setups)
-            .ThenInclude(p => p.Photos)
-            .ToListAsync();
-    }
-
     public async Task<bool> SaveAllAsync()
     {
       return await _context.SaveChangesAsync() > 0;
