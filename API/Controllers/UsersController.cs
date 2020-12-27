@@ -18,8 +18,10 @@ namespace Api.Controllers
   {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
-    public UsersController(IUserRepository userRepository, IMapper mapper)
+    private readonly ISetupRepository _setupRepository;
+    public UsersController(IUserRepository userRepository, IMapper mapper, ISetupRepository setupRepository)
     {
+      _setupRepository = setupRepository;
       _mapper = mapper;
       _userRepository = userRepository;
     }
@@ -43,12 +45,6 @@ namespace Api.Controllers
     public async Task<ActionResult<MemberDto>> GetUserById(int id)
     {
       return await _userRepository.GetMemberByIdAsync(id);
-    }
-
-    [HttpGet("setups")]
-    public async Task<ActionResult<IEnumerable<SetupDto>>> GetSetups()
-    {
-      return Ok(await _userRepository.GetSetupsAsync());
     }
   }
 }

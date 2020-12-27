@@ -11,6 +11,7 @@ import { AccountService } from '../_services/account.service';
 import { MemberService } from '../_services/member.service';
 import { SetupService } from '../_services/setup.service';
 import {
+  GetMemberById,
   GetMembers,
   GetSetups,
   Login,
@@ -23,14 +24,11 @@ import { IAppState } from './app.model';
 @State<IAppState>({
   name: 'application',
   defaults: {
-    user: {
-      username: null,
-      name: null,
-      token: null,
-    },
+    user: undefined,
     members: [],
     setups: [],
-    selectedUser: null,
+    selectedUser: undefined,
+    member: undefined,
   },
 })
 @Injectable()
@@ -42,28 +40,33 @@ export class ApplicationState {
   ) {}
 
   @Selector()
-  static token(state: IAppState): string | null {
-    return state.user.token;
+  static token(state: IAppState): string | undefined | null {
+    return state.user?.token;
   }
 
   @Selector()
   static isAuthenticated(state: IAppState): boolean {
-    return !!state.user.token;
+    return !!state.user?.token;
   }
 
   @Selector()
-  static user(state: IAppState): IUserLogin {
+  static user(state: IAppState): IUserLogin | undefined {
     return state.user;
   }
 
   @Selector()
-  static members(state: IAppState): IMemberDto[] {
+  static members(state: IAppState): IMemberDto[] | undefined {
     return state.members;
   }
 
   @Selector()
-  static setups(state: IAppState): ISetupDto[] {
+  static setups(state: IAppState): ISetupDto[] | undefined {
     return state.setups;
+  }
+
+  @Selector()
+  static userSetups(state: IAppState): IMemberDto | null | undefined {
+    return state.member;
   }
 
   @Action(Login)
@@ -128,17 +131,28 @@ export class ApplicationState {
     );
   }
 
+  @Action(GetMemberById)
+  getMemberById(
+    { patchState }: StateContext<IAppState>,
+    { payload }: GetMemberById
+  ): Observable<IMemberDto> {
+    return this.memberService.getMemberById(payload).pipe(
+      tap((member: IMemberDto) => {
+        patchState({
+          member,
+        });
+      })
+    );
+  }
+
   @Action(Logout)
   logout({ patchState, dispatch }: StateContext<IAppState>): void {
     patchState({
-      user: {
-        username: null,
-        name: null,
-        token: null,
-      },
+      user: undefined,
       members: [],
       setups: [],
-      selectedUser: null,
+      selectedUser: undefined,
+      member: undefined,
     });
     dispatch(new Navigate(['login']));
   }
