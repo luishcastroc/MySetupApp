@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { faKey, faUser, faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { Navigate } from '@ngxs/router-plugin';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { Register } from '@state/app.actions';
 import { ToastrService } from 'ngx-toastr';
@@ -42,8 +42,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private store: Store,
     private actions$: Actions,
-    private toastrService: ToastrService,
-    private router: Router
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +57,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   cancelRegister(): void {
     this.registerForm.reset();
-    this.router.navigateByUrl('/');
+    this.store.dispatch(new Navigate(['/']));
   }
 
   ngOnDestroy(): void {

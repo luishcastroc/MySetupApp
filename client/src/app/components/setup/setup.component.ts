@@ -8,6 +8,9 @@ import {
   faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import { ISetupDto } from '@models/setup.model';
+import { Store } from '@ngxs/store';
+import { Navigate } from '@ngxs/router-plugin';
+import { SelectUser } from '@state/app.actions';
 
 @Component({
   selector: 'app-setup',
@@ -22,12 +25,14 @@ export class SetupComponent implements OnInit {
   faUser = faUser;
   faEnvelope = faEnvelope;
 
-  constructor(private router: Router) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
 
-  goToProfile(username: string): void {
-    console.log(slugify(username, { lower: true }));
-    this.router.navigate([`user/${slugify(username, { lower: true })}`]);
+  goToProfile(username: string, userId: number): void {
+    this.store.dispatch([
+      new SelectUser(userId),
+      new Navigate([`user/${slugify(username, { lower: true })}`]),
+    ]);
   }
 }

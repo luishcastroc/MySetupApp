@@ -13,5 +13,6 @@ namespace API.DTOs
     public ICollection<PhotoDto> Photos { get; set; }
     public ICollection<PartDto> Parts { get; set; }
     public string UserName { get; set; }
+    public int UserId { get; set; }
   }
 }

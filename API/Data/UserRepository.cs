@@ -28,6 +28,14 @@ namespace API.Data
             .SingleOrDefaultAsync();
     }
 
+    public async Task<MemberDto> GetMemberByIdAsync(int id)
+    {
+      return await _context.Users
+            .Where(user => user.Id == id)
+            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
+    }
+
     public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
       return await _context.Users

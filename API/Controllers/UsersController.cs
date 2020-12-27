@@ -38,6 +38,13 @@ namespace Api.Controllers
       return await _userRepository.GetMemberAsync(username);
     }
 
+    [Authorize]
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<MemberDto>> GetUserById(int id)
+    {
+      return await _userRepository.GetMemberByIdAsync(id);
+    }
+
     [HttpGet("setups")]
     public async Task<ActionResult<IEnumerable<SetupDto>>> GetSetups()
     {

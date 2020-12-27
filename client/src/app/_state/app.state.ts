@@ -10,7 +10,14 @@ import { ISetupDto } from '../_models/setup.model';
 import { AccountService } from '../_services/account.service';
 import { MemberService } from '../_services/member.service';
 import { SetupService } from '../_services/setup.service';
-import { GetMembers, GetSetups, Login, Logout, Register } from './app.actions';
+import {
+  GetMembers,
+  GetSetups,
+  Login,
+  Logout,
+  Register,
+  SelectUser,
+} from './app.actions';
 import { IAppState } from './app.model';
 
 @State<IAppState>({
@@ -23,6 +30,7 @@ import { IAppState } from './app.model';
     },
     members: [],
     setups: [],
+    selectedUser: null,
   },
 })
 @Injectable()
@@ -81,7 +89,7 @@ export class ApplicationState {
   register(
     { patchState, dispatch }: StateContext<IAppState>,
     { payload }: Register
-  ) {
+  ): Observable<IUserLogin> {
     return this.accountService.register(payload).pipe(
       tap(({ token, username, name }: IUserLogin) => {
         patchState({
@@ -97,7 +105,9 @@ export class ApplicationState {
   }
 
   @Action(GetMembers)
-  getMembers({ patchState }: StateContext<IAppState>) {
+  getMembers({
+    patchState,
+  }: StateContext<IAppState>): Observable<IMemberDto[]> {
     return this.memberService.getMembers().pipe(
       tap((members: IMemberDto[]) => {
         patchState({
@@ -108,7 +118,7 @@ export class ApplicationState {
   }
 
   @Action(GetSetups)
-  getSetups({ patchState }: StateContext<IAppState>) {
+  getSetups({ patchState }: StateContext<IAppState>): Observable<ISetupDto[]> {
     return this.setupService.getSetups().pipe(
       tap((setups: ISetupDto[]) => {
         patchState({
@@ -119,8 +129,8 @@ export class ApplicationState {
   }
 
   @Action(Logout)
-  logout({ setState, dispatch }: StateContext<IAppState>): void {
-    setState({
+  logout({ patchState, dispatch }: StateContext<IAppState>): void {
+    patchState({
       user: {
         username: null,
         name: null,
@@ -128,7 +138,19 @@ export class ApplicationState {
       },
       members: [],
       setups: [],
+      selectedUser: null,
     });
     dispatch(new Navigate(['login']));
+  }
+
+  @Action(SelectUser)
+  selectUser(
+    { patchState }: StateContext<IAppState>,
+    { payload }: SelectUser
+  ): void {
+    const selectedUser = payload;
+    patchState({
+      selectedUser,
+    });
   }
 }

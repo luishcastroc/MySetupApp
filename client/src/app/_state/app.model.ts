@@ -6,4 +6,5 @@ export interface IAppState {
   user: IUserLogin;
   members: IMemberDto[] | [];
   setups: ISetupDto[] | [];
+  selectedUser?: number | null;
 }

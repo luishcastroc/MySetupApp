@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { IUserLogin } from '@models/user-login.model';
-
+import { Navigate } from '@ngxs/router-plugin';
 import { Select, Store } from '@ngxs/store';
 import { Login, Logout } from '@state/app.actions';
 import { ApplicationState } from '@state/app.state';
@@ -27,11 +26,7 @@ export class NavComponent implements OnInit {
     password: ['', Validators.required],
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private store: Store,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit(): void {}
 
@@ -46,6 +41,6 @@ export class NavComponent implements OnInit {
 
   clickButton(e: MouseEvent): void {
     const target = e.target as HTMLTextAreaElement;
-    this.router.navigate([`${target.id}`]);
+    this.store.dispatch(new Navigate([`${target.id}`]));
   }
 }

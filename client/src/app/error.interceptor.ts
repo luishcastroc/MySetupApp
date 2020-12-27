@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { NavigationExtras, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { Navigate } from '@ngxs/router-plugin';
+import { Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private toastr: ToastrService) {}
+  constructor(private store: Store, private toastr: ToastrService) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -38,13 +40,13 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error(error.statusText, error.status);
               break;
             case 404:
-              this.router.navigateByUrl('/not-found');
+              this.store.dispatch(new Navigate(['/not-found']));
               break;
             case 500:
               const navigationExtras: NavigationExtras = {
                 state: { error: error.error },
               };
-              this.router.navigateByUrl('/server-error', navigationExtras);
+              this.store.dispatch(new Navigate(['/server-error']));
               break;
             default:
               this.toastr.error('Something unexpected went wrong');
