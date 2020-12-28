@@ -30,13 +30,6 @@ const routes: Routes = [
             (mod) => mod.MessagesModule
           ),
       },
-      {
-        path: 'user/:username',
-        loadChildren: () =>
-          import('@components/user-detail/user-detail.module').then(
-            (mod) => mod.UserDetailModule
-          ),
-      },
     ],
   },
   {
@@ -56,6 +49,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('@components/setups/setups.module').then(
         (mod) => mod.SetupsModule
+      ),
+  },
+  {
+    path: 'user/:username',
+    loadChildren: () =>
+      import('@components/user-detail/user-detail.module').then(
+        (mod) => mod.UserDetailModule
       ),
   },
   { path: '**', component: HomeComponent, pathMatch: 'full' },

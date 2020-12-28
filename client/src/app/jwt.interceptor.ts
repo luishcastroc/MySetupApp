@@ -6,18 +6,20 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { IAppState } from '@state/app.model';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private store: Store) {}
 
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = JSON.parse(localStorage.getItem('application.user')!)
-      ? JSON.parse(localStorage.getItem('application.user')!).token
-      : null;
+    const token = this.store.selectSnapshot<string | null | undefined>(
+      (state: IAppState) => state.user?.token
+    );
     if (token) {
       request.clone({
         setHeaders: {
