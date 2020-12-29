@@ -20,7 +20,7 @@ export class MemberService {
     return this.http.get<IMemberDto>(`${this.baseUrl}/users/${username}`);
   }
 
-  getMemberById(id: number): Observable<IMemberDto> {
+  getMemberById(id: number | undefined | null): Observable<IMemberDto> {
     return this.http.get<IMemberDto>(`${this.baseUrl}/users/${id}`);
   }
 }

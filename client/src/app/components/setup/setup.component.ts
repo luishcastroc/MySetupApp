@@ -30,6 +30,7 @@ export class SetupComponent implements OnInit {
   ngOnInit(): void {}
 
   goToProfile(username: string, userId: number): void {
+    localStorage.setItem('selectedUser', userId.toString());
     this.store.dispatch([
       new SelectUser(userId),
       new Navigate([`user/${slugify(username, { lower: true })}`]),

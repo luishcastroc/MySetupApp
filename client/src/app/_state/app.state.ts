@@ -27,7 +27,7 @@ import { IAppState } from './app.model';
     user: undefined,
     members: [],
     setups: [],
-    selectedUser: undefined,
+    selectedUser: 0,
     member: undefined,
   },
 })
@@ -40,33 +40,38 @@ export class ApplicationState {
   ) {}
 
   @Selector()
-  static token(state: IAppState): string | undefined | null {
-    return state.user?.token;
+  static token({ user }: IAppState): string | undefined | null {
+    return user?.token;
   }
 
   @Selector()
-  static isAuthenticated(state: IAppState): boolean {
-    return !!state.user?.token;
+  static isAuthenticated({ user }: IAppState): boolean {
+    return !!user?.token;
   }
 
   @Selector()
-  static user(state: IAppState): IUserLogin | undefined {
-    return state.user;
+  static user({ user }: IAppState): IUserLogin | undefined {
+    return user;
   }
 
   @Selector()
-  static members(state: IAppState): IMemberDto[] | undefined {
-    return state.members;
+  static members({ members }: IAppState): IMemberDto[] | undefined {
+    return members;
   }
 
   @Selector()
-  static setups(state: IAppState): ISetupDto[] | undefined {
-    return state.setups;
+  static setups({ setups }: IAppState): ISetupDto[] | undefined {
+    return setups;
   }
 
   @Selector()
-  static userSetups(state: IAppState): IMemberDto | null | undefined {
-    return state.member;
+  static userSetups({ member }: IAppState): IMemberDto | null | undefined {
+    return member;
+  }
+
+  @Selector()
+  static selectedUser({ selectedUser }: IAppState): number {
+    return selectedUser;
   }
 
   @Action(Login)
@@ -151,7 +156,7 @@ export class ApplicationState {
       user: undefined,
       members: [],
       setups: [],
-      selectedUser: undefined,
+      selectedUser: 0,
       member: undefined,
     });
     dispatch(new Navigate(['login']));
