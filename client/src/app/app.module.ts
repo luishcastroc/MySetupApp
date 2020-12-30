@@ -1,4 +1,3 @@
-import { JwtInterceptor } from './jwt.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -25,6 +24,7 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorInterceptor } from './error.interceptor';
+import { JwtInterceptor } from './jwt.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NavComponent, HomeComponent],

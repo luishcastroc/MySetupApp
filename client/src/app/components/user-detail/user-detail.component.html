@@ -1,18 +1,20 @@
 <ng-container *ngIf="{ value: isAuthenticated$ | async } as authenticated">
   <ng-container *ngIf="authenticated.value; else loggedOut">
     <ng-container *ngIf="member$ | async as member">
-      <ng-container
-        *ngTemplateOutlet="memberInfo; context: { member: member }"
-      ></ng-container>
+      <ng-container *ngIf="member">
+        <ng-container
+          *ngTemplateOutlet="memberInfo; context: { member: member }"
+        ></ng-container>
+      </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>
 
 <ng-template #memberInfo let-member="member">
   <div class="container-fluid">
-    <div class="row vh-100 min-vh-100">
+    <div class="row">
       <div class="col-4">
-        <div class="card vh-100 min-vh-100 bg-dark p-5">
+        <div class="card bg-dark p-5">
           <img
             src="{{ member.photoUrl }}"
             alt="{{ member.userName }}"

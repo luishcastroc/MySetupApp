@@ -1,12 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <ng-container *ngIf="setups$ | withLoading | async as items">
-      <ng-container *ngFor="let setup of items.value">
+    <ng-container *ngIf="setups$ | async as items">
+      <ng-container *ngFor="let setup of items">
         <div class="col-lg-4">
           <app-setup [setup]="setup"></app-setup>
         </div>
       </ng-container>
-      <ng-template [ngIf]="items.loading">Loading...</ng-template>
     </ng-container>
   </div>
 </div>
