@@ -1,12 +1,12 @@
-import { IAppState } from '@state/app.model';
-import { GetMemberById, SelectUser } from './../../_state/app.actions';
 import { Component, OnInit } from '@angular/core';
 import { ISetupDto } from '@models/setup.model';
 import { Navigate } from '@ngxs/router-plugin';
 import { Select, Store } from '@ngxs/store';
+import { IAppState } from '@state/app.model';
 import { ApplicationState } from '@state/app.state';
-import { combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { GetMemberById, SelectUser } from './../../_state/app.actions';
 
 @Component({
   selector: 'app-user-detail',
@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
 
   clickButton(e: MouseEvent): void {
     const target = e.target as HTMLTextAreaElement;
-    this.store.dispatch(new Navigate([`${target.id}`]));
+    this.store.dispatch(new Navigate([target.id]));
   }
 
   getSelectedUser(): void {
