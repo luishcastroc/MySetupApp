@@ -1,3 +1,4 @@
+import { IUserLogin } from '@models/user-login.model';
 import {
   HttpEvent,
   HttpHandler,
@@ -13,11 +14,15 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token: string = JSON.parse(
-      localStorage.getItem('application.user') || ''
-    ).token as string;
+    const user: string | null = localStorage.getItem('application.user');
+    let token: string | null = null;
+    if (user !== 'undefined') {
+      const parsedUser: IUserLogin = JSON.parse(user || '') as IUserLogin;
+      token = parsedUser.token;
+    }
+
     let reqClone;
-    if (token) {
+    if (token && token !== 'undefined') {
       reqClone = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
