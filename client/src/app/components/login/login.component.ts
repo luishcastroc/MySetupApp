@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
-
 import { faKey, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngxs/store';
 import { Login } from '@state/app.actions';
 
 @Component({
@@ -10,7 +9,7 @@ import { Login } from '@state/app.actions';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginForm = this.fb.group({
     username: [
       localStorage.getItem('username') || '',
@@ -34,8 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(private fb: FormBuilder, private store: Store) {}
-
-  ngOnInit(): void {}
 
   login(): void {
     this.store.dispatch(new Login(this.loginForm.value));

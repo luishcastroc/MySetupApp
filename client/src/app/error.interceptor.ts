@@ -5,7 +5,6 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
@@ -26,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           switch (error.status) {
             case 400:
               if (error.error.errors) {
-                const errors = error.error.errors;
+                const errors: string[] = error.error.errors as string[];
                 const modalStateErrors: string[] = [];
                 errors.forEach((err: string) => {
                   modalStateErrors.push(err);
@@ -43,9 +42,6 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.store.dispatch(new Navigate(['/not-found']));
               break;
             case 500:
-              const navigationExtras: NavigationExtras = {
-                state: { error: error.error },
-              };
               this.store.dispatch(new Navigate(['/server-error']));
               break;
             default:

@@ -9,14 +9,13 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor() {}
-
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const token = JSON.parse(localStorage.getItem('application.user') || '')
-      .token;
+    const token: string = JSON.parse(
+      localStorage.getItem('application.user') || ''
+    ).token as string;
     let reqClone;
     if (token) {
       reqClone = request.clone({

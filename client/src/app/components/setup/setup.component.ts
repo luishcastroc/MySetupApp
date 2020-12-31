@@ -1,23 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import slugify from 'slugify';
-
+import { Component, Input } from '@angular/core';
 import {
+  faEnvelope,
   faThumbsUp,
   faUser,
-  faEnvelope,
 } from '@fortawesome/free-solid-svg-icons';
 import { ISetupDto } from '@models/setup.model';
-import { Store } from '@ngxs/store';
 import { Navigate } from '@ngxs/router-plugin';
+import { Store } from '@ngxs/store';
 import { SelectUser } from '@state/app.actions';
+import slugify from 'slugify';
 
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.component.html',
   styleUrls: ['./setup.component.scss'],
 })
-export class SetupComponent implements OnInit {
+export class SetupComponent {
   @Input()
   setup!: ISetupDto;
 
@@ -26,8 +24,6 @@ export class SetupComponent implements OnInit {
   faEnvelope = faEnvelope;
 
   constructor(private store: Store) {}
-
-  ngOnInit(): void {}
 
   goToProfile(username: string, userId: number): void {
     localStorage.setItem('selectedUser', userId.toString());

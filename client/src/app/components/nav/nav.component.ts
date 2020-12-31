@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { IUserLogin } from '@models/user-login.model';
 import { Navigate } from '@ngxs/router-plugin';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
   @Select(ApplicationState.isAuthenticated)
   isAuthenticated$!: Observable<boolean>;
 
@@ -27,8 +27,6 @@ export class NavComponent implements OnInit {
   });
 
   constructor(private fb: FormBuilder, private store: Store) {}
-
-  ngOnInit(): void {}
 
   login(): void {
     this.store.dispatch(new Login(this.loginForm.value));

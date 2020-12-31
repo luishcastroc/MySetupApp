@@ -12,15 +12,15 @@ export class MemberService {
   baseUrl: string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
-  getMembers() {
+  getMembers(): Observable<IMemberDto[]> {
     return this.http.get<IMemberDto[]>(`${this.baseUrl}/users`);
   }
 
-  getMemberByName(username: string) {
+  getMemberByName(username: string): Observable<IMemberDto> {
     return this.http.get<IMemberDto>(`${this.baseUrl}/users/${username}`);
   }
 
-  getMemberById(id: number | undefined | null) {
+  getMemberById(id: number): Observable<IMemberDto> {
     return this.http.get<IMemberDto>(`${this.baseUrl}/users/${id}`);
   }
 }
