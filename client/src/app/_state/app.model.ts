@@ -1,6 +1,6 @@
-import { IUserLogin } from '../_models';
-import { IMemberDto } from '../_models/member.model';
-import { ISetupDto } from '../_models/setup.model';
+import { IMemberDto } from '@models/member.model';
+import { ISetupDto } from '@models/setup.model';
+import { IUserLogin } from '@models/user-login.model';
 
 export interface IAppState {
   user?: IUserLogin;

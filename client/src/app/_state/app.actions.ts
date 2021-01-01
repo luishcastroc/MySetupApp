@@ -1,5 +1,5 @@
-import { ILogin } from '../_models';
-import { IUserRegisterDto } from '../_models/register.model';
+import { ILogin } from '@models/login.model';
+import { IUserRegisterDto } from '@models/register.model';
 
 export class Login {
   static readonly type = '[Auth] Login';

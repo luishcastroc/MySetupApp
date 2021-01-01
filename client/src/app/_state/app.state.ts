@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
+import { IMemberDto } from '@models/member.model';
+import { ISetupDto } from '@models/setup.model';
+import { IUserLogin } from '@models/user-login.model';
 import { Navigate } from '@ngxs/router-plugin';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { AccountService } from '@services/account.service';
+import { MemberService } from '@services/member.service';
+import { SetupService } from '@services/setup.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { IUserLogin } from '../_models';
-import { IMemberDto } from '../_models/member.model';
-import { ISetupDto } from '../_models/setup.model';
-import { AccountService } from '../_services/account.service';
-import { MemberService } from '../_services/member.service';
-import { SetupService } from '../_services/setup.service';
 import {
   GetMemberById,
   GetMembers,

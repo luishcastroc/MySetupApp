@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ILogin } from '@models/login.model';
+import { IUserLogin } from '@models/user-login.model';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { ILogin, IUserLogin } from '../_models';
 import { IUserRegisterDto } from '../_models/register.model';
 
 @Injectable({
