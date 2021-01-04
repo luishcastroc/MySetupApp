@@ -11,20 +11,28 @@
 </ng-container>
 
 <ng-template #memberInfo let-member="member">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-4">
-        <div class="card bg-dark p-5">
-          <img
-            src="{{ member.photoUrl }}"
-            alt="{{ member.userName }}"
-            class="card-img-top img-thumbnail"
-          />
-          <div class="card-body">
-            <span>{{ member.userName }}</span>
-          </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-lg-4">
+      <div class="card bg-dark p-2">
+        <img
+          src="{{ member.photoUrl || '../../assets/dummy-profile-icon.png' }}"
+          alt="{{ member.userName }}"
+          class="card-img-top img-thumbnail"
+        />
+        <div class="card-body">
+          <strong>Name:</strong>
+          <p>{{ member.name }}</p>
+          <strong>Age:</strong>
+          <p>{{ member.age }}</p>
+          <strong>Occupation:</strong>
+          <p>{{ member.occupation }}</p>
+          <strong>Location:</strong>
+          <p>{{ member.city }}, {{ member.country }}</p>
         </div>
       </div>
+    </div>
+    <div class="col col-xs-12">
+      <app-user-tabs></app-user-tabs>
     </div>
   </div>
 </ng-template>

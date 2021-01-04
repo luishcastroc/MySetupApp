@@ -2,7 +2,7 @@
   <div class="row">
     <ng-container *ngIf="setups$ | async as items">
       <ng-container *ngFor="let setup of items">
-        <div class="col-lg-4">
+        <div class="col col-sm-6 col-md-4 col-lg-3">
           <app-setup [setup]="setup"></app-setup>
         </div>
       </ng-container>

@@ -1,0 +1,39 @@
+$bg-color: #343a40;
+
+::ng-deep {
+  .nav {
+    background-color: grey;
+  }
+
+  .tab-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .tab-content {
+    background-color: $bg-color;
+    flex: 1;
+  }
+
+  .nav-link {
+    color: white;
+    &:hover {
+      color: $bg-color;
+      border: none;
+    }
+    &.active {
+      background-color: $bg-color !important;
+      color: white !important;
+      border: none !important;
+    }
+  }
+
+  .nav-tabs {
+    border: none;
+  }
+
+  .nav-tabs .nav-item {
+    margin-bottom: -2px;
+  }
+}

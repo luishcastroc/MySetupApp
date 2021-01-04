@@ -1,5 +1,14 @@
 .img-thumbnail {
-  height: 300px;
+  width: 340px;
+  height: 340px;
   background-color: transparent;
   border: none;
+}
+
+.card {
+  align-items: center;
+}
+
+.row {
+  padding: 0px 30px 0px 30px;
 }
