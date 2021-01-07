@@ -5,6 +5,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +14,11 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private store: Store, private toastr: ToastrService) {}
+  constructor(
+    private store: Store,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -36,7 +41,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
             case 401:
-              this.toastr.error(error.statusText, error.status);
+              if (!this.router.routerState.snapshot.url.includes('/user/')) {
+                this.toastr.error(error.statusText, error.status);
+              }
               break;
             case 404:
               this.store.dispatch(new Navigate(['/not-found']));
